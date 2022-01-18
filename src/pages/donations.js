@@ -30,6 +30,7 @@ function Donations() {
           <StaticImage
             className="block h-60 md:h-64 w-full sm:w-2/5 object-cover"
             src="../images/drake.JPG"
+            alt=""
           />
 
           <div className="flex-1">
