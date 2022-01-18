@@ -4,15 +4,16 @@ module.exports = {
     title: "Shalom Christian Embassy Church",
   },
   plugins: [
+    "gatsby-plugin-postcss",
     "gatsby-plugin-netlify-cms",
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
-    {
+    /* {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: "",
       },
-    },
+    } */
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {

@@ -1,0 +1,29 @@
+html {
+  font-family: "poppins", sans-serif, serif;
+}
+
+.container {
+  width: 90%;
+
+  @media (min-width: 600px) {
+    width: 95%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 65%;
+  }
+}
+
+#body {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+main {
+  flex-grow: 1;
+}

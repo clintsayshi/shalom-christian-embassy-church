@@ -1,0 +1,224 @@
+# In your static/admin/config.yml file
+
+backend:
+  name: git-gateway
+  branch: master
+
+local_backend: true
+
+media_folder: static/assets
+public_folder: assets
+
+collections:
+  - label: "Pages"
+    name: "pages"
+    media_folder: "media"
+    public_folder: "media"
+    files:
+      - label: "About"
+        name: "about"
+        file: "content/about.md"
+        fields:
+          - {
+              label: "Name",
+              name: "name",
+              widget: "string",
+              default: "Shalom Christian Embassy",
+            }
+          - {
+              label: "Snippet",
+              name: "snippet",
+              widget: "string",
+              default: "Church for all Nations",
+            }
+          - { label: "Hero Image", name: "heroImage", widget: "image" }
+          - { label: "Vision Statement", name: "vision", widget: "text" }
+          - { label: "Vision Image", name: "visionImage", widget: "image" }
+          - { label: "Mission Statement", name: "mission", widget: "text" }
+          - { label: "Mission Image", name: "missionImage", widget: "image" }
+          - label: "Our Values"
+            name: "values"
+            widget: "list"
+            fields:
+              - { label: "Value", name: "value", widget: "string" }
+          - {
+              label: "Statement of faith",
+              name: "statementOfFaith",
+              widget: "string",
+            }
+          - label: "What we believe"
+            name: "statementsOfFaith"
+            widget: "list"
+            summary: "{{fields.statement}}"
+            fields:
+              - { label: "Statement", name: "statement", widget: text }
+          - label: "Church Leaders"
+            name: "leaders"
+            widget: "list"
+            summary: "{{fields.name}} - {{fields.role}}"
+            fields:
+              - {
+                  label: "Name",
+                  name: "name",
+                  widget: "string",
+                  default: "Apostle Sithole MZ",
+                }
+              - {
+                  label: "Role in the church",
+                  name: "role",
+                  widget: "string",
+                  default: "Senior Pastor",
+                }
+              - {
+                  label: "Short Description",
+                  name: "bio",
+                  widget: "text",
+                  default: "The alpha and omega of SCE",
+                }
+              - {
+                  label: "Photo",
+                  name: "photo",
+                  widget: "image",
+                  default: "/assets/default-user.png",
+                }
+
+      - label: "Donations Page"
+        name: "donations"
+        file: "content/donations.md"
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Snippet, name: snippet, widget: string }
+          - { label: "Hero Image", name: "heroImage", widget: "image" }
+          - { label: Bank Name, name: bank, widget: string }
+          - { label: Account Number, name: AccNumber, widget: string }
+          - { label: Branch Code, name: branchCode, widget: string }
+
+      - label: "Contact"
+        name: "contact"
+        file: "content/contact.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Snippet", name: "snippet", widget: "string" }
+          - { label: "Hero Image", name: "heroImage", widget: "image" }
+          - {
+              label: "Physical Address",
+              name: "physicalAddress",
+              widget: "string",
+            }
+          - { label: "Postal Address", name: "postalAddress", widget: "string" }
+          - { label: "Zip Code", name: "zipcode", widget: "string" }
+          - label: "Phone Numbers"
+            name: "phoneNumbers"
+            widget: "list"
+            fields:
+              - {
+                  label: "Number Holder",
+                  name: "numberholder",
+                  widget: "string",
+                }
+              - { label: "Number", name: "number", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - label: "Socials"
+            name: "socials"
+            widget: "list"
+            summary: "{{fields.url}} - {{fields.username}}"
+            fields:
+              - {
+                  label: "Username",
+                  name: "username",
+                  widget: "string",
+                  default: "shalomcec",
+                }
+              - { label: "Base URL", name: "url", widget: "string" }
+              - {
+                  label: "Platform",
+                  name: "platform",
+                  widget: "select",
+                  options: ["facebook", "instagram", "youtube", "twitter"],
+                }
+
+      - label: "Ministries"
+        name: "ministries"
+        file: "content/ministries.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Snippet", name: "snippet", widget: "string" }
+          - { label: "Hero Image", name: "heroImage", widget: "image" }
+          - label: "Ministries"
+            name: "ministries"
+            widget: "list"
+            summary: "{{fields.name}} - {{fields.desc}}"
+            fields:
+              - { label: "Ministry Name", name: "name", widget: "string" }
+              - { label: "Description", name: "desc", widget: "string" }
+
+      - label: "Service Times"
+        name: "serivicetimes"
+        file: "content/servicetimes.md"
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Snippet, name: snippet, widget: text }
+          - { label: "Hero Image", name: "heroImage", widget: "image" }
+          - {
+              label: "Sunday Main Service",
+              name: "sundayMainService",
+              widget: "string",
+            }
+          - {
+              label: "Sunday Services Image",
+              name: "sundayServicesImage",
+              widget: image,
+            }
+          - label: "Sunday Schools"
+            name: "sundaySchools"
+            widget: "list"
+            summary: "{{fields.name - fields.time}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Time", name: "time", widget: "string" }
+          - {
+              label: "Weekday Services Image",
+              name: "weekdayServicesImage",
+              widget: "image",
+            }
+          - label: "Weekday Services"
+            name: "weekdayServices"
+            widget: "list"
+            fields:
+              - { label: Day of Week, name: "weekday", widget: "string" }
+              - label: "Service Details"
+                name: "serviceDetails"
+                widget: "list"
+                summary: "{{fields.name - fields.time}}"
+                fields:
+                  - { label: "Name of Service", name: "name", widget: "string" }
+                  - { label: "Time of Service", name: "time", widget: "string" }
+
+      - label: "Events"
+        name: "events"
+        file: "content/events.md"
+        fields:
+          - {
+              label: "Title",
+              name: "title",
+              widget: "string",
+              default: "Events",
+            }
+          - {
+              label: "Snippet",
+              name: "snippet",
+              widget: "string",
+              default: "Upcoming events",
+            }
+          - { label: "Hero Image", name: "heroImage", widget: "image" }
+          - label: "Events"
+            name: "events"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Cover", name: "image", widget: "image" }
+              - { label: "Venue", name: "venue", widget: "string" }
+              - { label: "Start Time", name: "startTime", widget: "string" }
+              - { label: "End Time", name: "endTime", widget: "string" }
+              - { label: "Date", name: "date", widget: "date" }
+              - { label: "Description", name: "desc", widget: "text" }
