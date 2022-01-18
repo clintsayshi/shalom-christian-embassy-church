@@ -28,9 +28,9 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <section className="relative bg-white-300 border-dotted">
+      <section className="relative bg-white-300">
         <StaticImage
-          className="absolute  w-full h-full inset-0 opacity-30"
+          className="absolute w-full h-full inset-0 opacity-30"
           src="../images/hero-bg.jpg"
           alt=""
         />
