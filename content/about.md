@@ -1,7 +1,7 @@
 ---
 name: Who we are
 snippet: Church for all Nations
-heroImage: https://images.pexels.com/photos/7468087/pexels-photo-7468087.jpeg?cs=srgb&dl=pexels-rodnae-productions-7468087.jpg&fm=jpg
+heroImage: https://images.pexels.com/photos/935944/pexels-photo-935944.jpeg?cs=srgb&dl=pexels-nappy-935944.jpg&fm=jpg
 vision: To receive and maintain the peace of the Successor (Jesus Christ) and
   preach the good news of the Kingdom of God to the whole world.
 visionImage: https://images.pexels.com/photos/267549/pexels-photo-267549.jpeg?cs=srgb&dl=pexels-pixabay-267549.jpg&fm=jpg
