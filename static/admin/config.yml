@@ -16,6 +16,41 @@ collections:
     media_folder: "media"
     public_folder: "media"
     files:
+      - label: "Home"
+        name: "home"
+        file: "content/home.md"
+        fields:
+          - {
+              label: "Heading",
+              name: "heading",
+              widget: "string",
+              default: "Church for all nations",
+            }
+          - {
+              label: "Subheading",
+              name: "subHeading",
+              widget: "string",
+              default: "Communicating the gospel of Jesus Christ in services of God, of one another and that of the world.",
+            }
+          - {
+              label: "Call to Action Text",
+              name: "ctaText",
+              widget: "string",
+              default: "Learn more",
+            }
+          - {
+              label: "Quote",
+              name: "quote",
+              widget: "text",
+              default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, repudiandae quam ipsam eos eaque alias?",
+            }
+          - {
+              label: "Book",
+              name: "quotedBook",
+              widget: "text",
+              default: "John 14:5",
+            }
+
       - label: "About"
         name: "about"
         file: "content/about.md"
@@ -106,14 +141,12 @@ collections:
               name: "physicalAddress",
               widget: "string",
             }
-          - { label: "Postal Address", name: "postalAddress", widget: "string" }
-          - { label: "Zip Code", name: "zipcode", widget: "string" }
           - label: "Phone Numbers"
             name: "phoneNumbers"
             widget: "list"
             fields:
               - {
-                  label: "Number Holder",
+                  label: "This Number is for",
                   name: "numberholder",
                   widget: "string",
                 }
@@ -164,11 +197,6 @@ collections:
               label: "Sunday Main Service",
               name: "sundayMainService",
               widget: "string",
-            }
-          - {
-              label: "Sunday Services Image",
-              name: "sundayServicesImage",
-              widget: image,
             }
           - label: "Sunday Schools"
             name: "sundaySchools"
