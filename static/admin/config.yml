@@ -20,6 +20,7 @@ collections:
         name: "home"
         file: "content/home.md"
         fields:
+          - { label: "Hero Image", name: "heroImg", widget: "img" }
           - {
               label: "Heading",
               name: "heading",
