@@ -1,18 +1,38 @@
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 import Banner from "../components/banner";
 import Layout from "../components/layout";
 
 function Contact() {
+  const data = useStaticQuery(graphql`
+    {
+      file(name: { eq: "contact" }, sourceInstanceName: { eq: "content" }) {
+        childMarkdownRemark {
+          frontmatter {
+            title
+            heroImage
+            snippet
+            name
+            physicalAddress
+            phoneNumbers {
+              number
+              numberholder
+            }
+            email
+          }
+        }
+      }
+    }
+  `).file.childMarkdownRemark.frontmatter;
+
   return (
     <Layout>
-      <Banner title="Contact us" img="../images/hero-bg.jpg" />
+      <Banner title={data.title} img="../images/hero-bg.jpg" />
 
       <section>
         <div className="container mx-auto flex flex-col sm:items-center">
-          <h2 className="py-6 sm:py-10 text-2xl text-center">
-            Get in touch with us
-          </h2>
+          <h2 className="py-6 sm:py-10 text-2xl text-center">{data.snippet}</h2>
 
           <div className="w-full sm:w-10/12 mx-auto flex flex-col sm:flex-row gap-4 md:gap-4 sm:gap-8 justify-between">
             <article className="flex flex-col sm:flex-1 gap-1 items-center">
@@ -20,8 +40,12 @@ function Contact() {
               <h4 className="text-base font-medium uppercase text-secondary-color">
                 Phone
               </h4>
-              <span className="text-sm">+05478347848</span>
-              <span className="text-sm">+05478347848</span>
+
+              {React.Children.toArray(
+                data.phoneNumbers.map((item) => (
+                  <span className="text-sm">{item.number}</span>
+                ))
+              )}
             </article>
             <article className="flex flex-col sm:flex-1 gap-1 items-center">
               <FiMapPin className="text-xl mb-4 text-secondary-color" />
@@ -29,7 +53,7 @@ function Contact() {
                 Address
               </h4>
               <address className="text-sm text-center">
-                Matsulu B, P O Box 7430, 1203
+                {data.physicalAddress}
               </address>
             </article>
             <article className="flex flex-col sm:flex-1 gap-1 items-center">
@@ -37,8 +61,7 @@ function Contact() {
               <h4 className="text-base font-medium uppercase text-secondary-color">
                 Email
               </h4>
-              <span className="text-sm">example@gmail.com</span>
-              <span className="text-sm">another@gmail.com</span>
+              <span className="text-sm">{data.email}</span>
             </article>
           </div>
         </div>

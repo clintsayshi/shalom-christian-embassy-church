@@ -1,19 +1,50 @@
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import Banner from "../components/banner";
 import Layout from "../components/layout";
 
 function ServiceTimes() {
+  const data = useStaticQuery(graphql`
+    {
+      file(
+        name: { eq: "servicetimes" }
+        sourceInstanceName: { eq: "content" }
+      ) {
+        childMarkdownRemark {
+          frontmatter {
+            title
+            heroImage
+            snippet
+            weekdayServices {
+              serviceDetails {
+                name
+                time
+              }
+              weekday
+            }
+            weekdayServicesImage
+            sundayMainService
+            sundaySchools {
+              name
+              time
+            }
+          }
+        }
+      }
+    }
+  `).file.childMarkdownRemark.frontmatter;
+
   return (
     <Layout>
-      <Banner title="Church Service Times" img="../images/hero-bg.jpg" />
+      <Banner title={data.title} img={data.heroImage} />
 
       <div className="container mx-auto h-px w-full my-4"></div>
 
       <section>
         <div className="container mx-auto flex flex-col gap-2 sm:items-center">
           <h2 className="text-xl text-center">Sunday Main Service</h2>
-          <p className="text-center">10:30 AM - 13:00 PM</p>
+          <p className="text-center">{data.sundayMainService}</p>
         </div>
       </section>
 
@@ -29,19 +60,15 @@ function ServiceTimes() {
 
           <div className="flex flex-col flex-1 gap-4 items-center sm:items-start">
             <h2 className="text-xl text-center sm:text-left">Sunday Schools</h2>
-            <div className="w-full flex flex-row justify-between">
-              <h4 className="text-base font-medium">Elders School</h4>
-              <span className="text-sm text-gray-800">10:30 AM - 13:00 PM</span>
-            </div>
 
-            <div className="w-full flex flex-row justify-between">
-              <h4 className="text-base font-medium">Children Ministry</h4>
-              <span className="text-sm text-gray-800">10:30 AM - 13:00 PM</span>
-            </div>
-            <div className="w-full flex flex-row justify-between">
-              <h4 className="text-base font-medium">Pastor's className</h4>
-              <span className="text-sm text-gray-800">10:30 AM - 13:00 PM</span>
-            </div>
+            {React.Children.toArray(
+              data.sundaySchools.map((item) => (
+                <article className="w-full flex flex-row justify-between">
+                  <h4 className="text-base font-medium">{item.name}</h4>
+                  <span className="text-sm text-gray-800">{item.time}</span>
+                </article>
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -52,14 +79,19 @@ function ServiceTimes() {
         <div className="container mx-auto flex flex-col gap-4 sm:items-center">
           <h2 className="text-xl text-center">Weekday Services</h2>
           <div className="flex flex-row flex-wrap gap-2 sm:gap-4">
-            <article className="h-36 w-full sm:w-44 p-4 flex flex-col justify-between bg-green-200">
-              <h4 className="text-base font-medium">Fasting and Prayer days</h4>
+            {/* {
+              React.Children.toArray(data.weekdayServices.map(item=>(
+                <article className="h-36 w-full sm:w-44 p-4 flex flex-col justify-between bg-green-200">
+              <h4 className="text-base font-medium">{item.serviceDetails.name}</h4>
 
               <div>
-                <p className="text-sm">Monday</p>
-                <time className="text-xs">10:30 AM - 13:00 PM</time>
+                <p className="text-sm">{item.weekday}</p>
+                <time className="text-xs">{item.serviceDetails.time}</time>
               </div>
             </article>
+              )))
+            } */}
+
             <article className="h-36 w-full sm:w-44 p-4 flex flex-col justify-between bg-green-200">
               <h4 className="text-base font-medium">Fasting and Prayer days</h4>
 

@@ -1,72 +1,71 @@
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import Banner from "../components/banner";
 import Layout from "../components/layout";
 
 function Ministries() {
   //
+  const data = useStaticQuery(graphql`
+    {
+      file(name: { eq: "ministries" }, sourceInstanceName: { eq: "content" }) {
+        childMarkdownRemark {
+          frontmatter {
+            title
+            heroImage
+            snippet
+            name
+            ministries {
+              desc
+              name
+            }
+          }
+        }
+      }
+    }
+  `).file.childMarkdownRemark.frontmatter;
+
+  const ministries = data.ministries.map((item) => {
+    const id = item.name.replace(" ", "-").toLowerCase();
+    return {
+      name: item.name,
+      desc: item.desc,
+      id,
+    };
+  });
 
   return (
     <Layout>
-      <Banner title="Church Ministries" img="fdfdfdfd" />
+      <Banner title={data.title} img={data.heroImage} />
 
       <div className="container mx-auto h-px sm:my-4"></div>
 
-      <section class="container mx-auto sm:flex">
-        <div class="w-56 h-screen hidden sm:flex flex-col justify-start">
-          <nav class="w-full  sticky top-0">
-            <a
-              class="block p-2 capitalize font-medium hover:bg-gray-100"
-              href="#item1"
-            >
-              Apostolic Alliance
-            </a>
-            <a class="block p-2 capitalize hover:bg-gray-100" href="#item2">
-              Only Jesus Saves Ministry
-            </a>
-            <a class="block p-2 capitalize hover:bg-gray-100" href="#item3">
-              Deepr Life Ministry
-            </a>
-            <a class="block p-2 capitalize hover:bg-gray-100" href="#item3">
-              Deepr Life Ministry
-            </a>
-            <a class="block p-2 capitalize hover:bg-gray-100" href="#item3">
-              Deepr Life Ministry
-            </a>
-            <a class="block p-2 capitalize hover:bg-gray-100" href="#item3">
-              Deepr Life Ministry
-            </a>
+      <section className="container mx-auto sm:flex">
+        <div className="w-56 h-screen hidden sm:flex flex-col justify-start">
+          <nav className="w-full  sticky top-0">
+            {React.Children.toArray(
+              ministries.map((item) => {
+                return (
+                  <a
+                    className="block p-2 capitalize font-medium hover:bg-gray-100"
+                    href={`#${item.id}`}
+                  >
+                    {item.name}
+                  </a>
+                );
+              })
+            )}
           </nav>
         </div>
 
-        <div class="sm:w-2/3 sm:py-4 flex flex-col gap-4">
-          <article id="item1" class="py-4 sm:pl-4 sm:shadow">
-            <h4 class="mb-2 text-2xl">Apostolic Alliance</h4>
-            <p class="text-sm ">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi
-              quam aspernatur velit ab. Eius, saepe. Architecto minima possimus
-              expedita enim molestiae atque asperiores, consequuntur, reiciendis
-              ullam quia nostrum pariatur fugiat.
-            </p>
-          </article>
-
-          <article id="item1" class="py-4 sm:pl-4 sm:shadow">
-            <h4 class="mb-2 text-2xl">Apostolic Alliance</h4>
-            <p class="text-sm ">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi
-              quam aspernatur velit ab. Eius, saepe. Architecto minima possimus
-              expedita enim molestiae atque asperiores, consequuntur, reiciendis
-              ullam quia nostrum pariatur fugiat.
-            </p>
-          </article>
-          <article id="item1" class="py-4 sm:pl-4 sm:shadow">
-            <h4 class="mb-2 text-2xl">Apostolic Alliance</h4>
-            <p class="text-sm ">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi
-              quam aspernatur velit ab. Eius, saepe. Architecto minima possimus
-              expedita enim molestiae atque asperiores, consequuntur, reiciendis
-              ullam quia nostrum pariatur fugiat.
-            </p>
-          </article>
+        <div className="sm:w-2/3 sm:py-4 flex flex-col gap-4">
+          {React.Children.toArray(
+            ministries.map((item) => (
+              <article id={item.id} className="py-4 sm:pl-4 sm:shadow">
+                <h4 className="mb-2 text-2xl">{item.name}</h4>
+                <p className="text-sm ">{item.desc}</p>
+              </article>
+            ))
+          )}
         </div>
       </section>
 

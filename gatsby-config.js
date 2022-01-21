@@ -3,9 +3,42 @@ module.exports = {
     siteUrl: "https://www.yourdomain.tld",
     title: "Shalom Christian Embassy Church",
   },
+
   plugins: [
-    "gatsby-plugin-postcss",
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          "gatsby-remark-relative-images",
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1024,
+            },
+          },
+        ],
+      },
+    },
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
+    `gatsby-transformer-remark`,
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/static/assets`,
+        name: "images",
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: `content`,
+        path: `${__dirname}/content`,
+      },
+    },
     "gatsby-plugin-netlify-cms",
+    "gatsby-plugin-postcss",
+
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
     /* {
@@ -22,9 +55,7 @@ module.exports = {
         icon: "src/images/icon.png",
       },
     },
-    "gatsby-transformer-remark",
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
+
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -33,20 +64,7 @@ module.exports = {
       },
       __key: "images",
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/static/assets`,
-        name: "images",
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: `content`,
-        path: `${__dirname}/content`,
-      },
-    },
+
     {
       resolve: "gatsby-source-filesystem",
       options: {

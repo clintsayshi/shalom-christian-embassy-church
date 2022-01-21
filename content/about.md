@@ -1,5 +1,5 @@
 ---
-name: Who we are
+title: Who we are
 snippet: Church for all Nations
 heroImage: https://images.pexels.com/photos/935944/pexels-photo-935944.jpeg?cs=srgb&dl=pexels-nappy-935944.jpg&fm=jpg
 vision: To receive and maintain the peace of the Successor (Jesus Christ) and
@@ -17,10 +17,12 @@ values:
   - value: Integrity
 statementOfFaith: The church (SCE) as Body of Jesus Christ believes
 statementsOfFaith:
-  - statement: That the scriptures, both Old and New Testament are fully inspired by
+  - statement:
+      That the scriptures, both Old and New Testament are fully inspired by
       the Holy Spirit are the final authority for the church.
   - statement: That God the Father is the creator and maintainer of all things.
-  - statement: Lived a sinless life, did miracles and died on a cross to atone fully
+  - statement:
+      Lived a sinless life, did miracles and died on a cross to atone fully
       our sins. He rose physically from the dead and ascended to heaven.
 leaders:
   - name: Apostle Sithole MZ

@@ -20,7 +20,7 @@ collections:
         name: "home"
         file: "content/home.md"
         fields:
-          - { label: "Hero Image", name: "heroImg", widget: "image" }
+          - { label: "Hero Image", name: "heroImage", widget: "image" }
           - {
               label: "Heading",
               name: "heading",
@@ -57,10 +57,10 @@ collections:
         file: "content/about.md"
         fields:
           - {
-              label: "Name",
-              name: "name",
+              label: "Title",
+              name: "title",
               widget: "string",
-              default: "Shalom Christian Embassy",
+              default: "About us",
             }
           - {
               label: "Snippet",
@@ -76,6 +76,7 @@ collections:
           - label: "Our Values"
             name: "values"
             widget: "list"
+            summary: "{{fields.value}}"
             fields:
               - { label: "Value", name: "value", widget: "string" }
           - {
@@ -145,12 +146,9 @@ collections:
           - label: "Phone Numbers"
             name: "phoneNumbers"
             widget: "list"
+            summary: "{{fields.office - fields.number}}"
             fields:
-              - {
-                  label: "This Number is for",
-                  name: "numberholder",
-                  widget: "string",
-                }
+              - { label: "Office", name: "office", widget: "string" }
               - { label: "Number", name: "number", widget: "string" }
           - { label: "Email", name: "email", widget: "string" }
           - label: "Socials"
@@ -194,9 +192,10 @@ collections:
           - { label: Title, name: title, widget: string }
           - { label: Snippet, name: snippet, widget: text }
           - { label: "Hero Image", name: "heroImage", widget: "image" }
+          - { label: "Main Service", name: "mainService", widget: "string" }
           - {
-              label: "Sunday Main Service",
-              name: "sundayMainService",
+              label: "Main Service Time",
+              name: "mainServiceTime",
               widget: "string",
             }
           - label: "Sunday Schools"
@@ -214,15 +213,11 @@ collections:
           - label: "Weekday Services"
             name: "weekdayServices"
             widget: "list"
+            summary: "{{fields.title - fields.weekday}}"
             fields:
               - { label: Day of Week, name: "weekday", widget: "string" }
-              - label: "Service Details"
-                name: "serviceDetails"
-                widget: "list"
-                summary: "{{fields.name - fields.time}}"
-                fields:
-                  - { label: "Name of Service", name: "name", widget: "string" }
-                  - { label: "Time of Service", name: "time", widget: "string" }
+              - { label: "Title of Service", name: "title", widget: "string" }
+              - { label: "Time of Service", name: "time", widget: "string" }
 
       - label: "Events"
         name: "events"

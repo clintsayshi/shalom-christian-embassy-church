@@ -1,9 +1,33 @@
 import { StaticImage } from "gatsby-plugin-image";
+import { useStaticQuery, graphql } from "gatsby";
 import React from "react";
 import Banner from "../components/banner";
 import Layout from "../components/layout";
 
 function Events() {
+  /* const data = useStaticQuery(graphql`
+    {
+      file(name: { eq: "events" }, sourceInstanceName: { eq: "content" }) {
+        childMarkdownRemark {
+          frontmatter {
+            heroImage
+            snippet
+            title
+            events {
+              name
+              image
+              venue
+              startTime
+              endTime
+              date
+              desc
+            }
+          }
+        }
+      }
+    }
+  `).file.childMarkdownRemark.frontmatter; */
+
   return (
     <Layout>
       <Banner title="Upcoming events" img="../images/hero-bg.jpg" />
