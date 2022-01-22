@@ -63,10 +63,10 @@ const IndexPage = () => {
 
       <section>
         <div className="container mx-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-          <StaticImage
+          {/*  <StaticImage
             className="block h-60 md:h-64 w-full sm:w-2/5 object-cover"
             src="../images/drake.JPG"
-          />
+          /> */}
 
           <div className="flex-1 ">
             <h2 className="text-2xl text-secondary-color">Values</h2>
@@ -104,10 +104,10 @@ const IndexPage = () => {
             </Link>
           </div>
 
-          <StaticImage
+          {/* <StaticImage
             className="block h-60 w-full sm:w-2/5 object-cover"
             src="../images/home.JPG"
-          />
+          /> */}
         </div>
       </section>
 
@@ -115,10 +115,10 @@ const IndexPage = () => {
 
       <section>
         <div className="container mx-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-          <img
+          {/* <StaticImage
             className="block h-60 md:h-64 w-full sm:w-2/5 object-cover"
             src="../images/drake.JPG"
-          />
+          /> */}
 
           <div className="flex-1 ">
             <h2 className="text-2xl text-secondary-color">Ministries</h2>
