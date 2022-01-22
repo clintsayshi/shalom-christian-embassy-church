@@ -4,8 +4,9 @@ import React from "react";
 function Banner({ img, title }) {
   return (
     <section className="relative bg-white-200">
-      <StaticImage
+      <img
         className="absolute w-full h-full inset-0 opacity-30"
+        imgClassName="relative"
         src="../images/home.jpg"
         alt=""
       />

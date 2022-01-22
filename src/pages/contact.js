@@ -13,7 +13,6 @@ function Contact() {
             title
             heroImage
             snippet
-            name
             physicalAddress
             phoneNumbers {
               number

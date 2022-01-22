@@ -37,6 +37,9 @@ const About = () => {
     }
   `).file.childMarkdownRemark.frontmatter;
 
+  //const visionImage = data.visionImage
+  const missionImage = data.missionImage;
+
   return (
     <Layout>
       <Banner title={data.name} img={data.heroImage} />
@@ -151,11 +154,12 @@ const About = () => {
 
           {React.Children.toArray(
             data.leaders.map((item) => {
+              const image = item.photo + "";
               return (
                 <article className="w-full mb-4 flex flex-col sm:flex-row gap-4 sm:gap-6">
-                  <StaticImage
+                  <img
                     className="block w-full h-60 sm:w-96"
-                    src={item.photo}
+                    src={image}
                     alt={item.name}
                   />
                   <div className="flex flex-col gap-1">

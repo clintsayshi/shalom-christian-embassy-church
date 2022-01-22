@@ -115,7 +115,7 @@ const IndexPage = () => {
 
       <section>
         <div className="container mx-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-          <StaticImage
+          <img
             className="block h-60 md:h-64 w-full sm:w-2/5 object-cover"
             src="../images/drake.JPG"
           />
