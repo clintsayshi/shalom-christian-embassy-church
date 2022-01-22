@@ -13,7 +13,6 @@ function Ministries() {
             title
             heroImage
             snippet
-            name
             ministries {
               desc
               name
