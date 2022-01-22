@@ -17,16 +17,15 @@ function ServiceTimes() {
             heroImage
             snippet
             weekdayServices {
-              serviceDetails {
-                name
-                time
-              }
+              title
+              time
               weekday
             }
             weekdayServicesImage
-            sundayMainService
+            mainService
+            mainServiceTime
             sundaySchools {
-              name
+              title
               time
             }
           }

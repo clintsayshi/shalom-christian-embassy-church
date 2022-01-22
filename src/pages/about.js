@@ -14,7 +14,7 @@ const About = () => {
           frontmatter {
             heroImage
             snippet
-            name
+            title
             mission
             missionImage
             leaders {

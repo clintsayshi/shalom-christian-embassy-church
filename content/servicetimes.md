@@ -5,7 +5,7 @@ heroImage: https://images.pexels.com/photos/250609/pexels-photo-250609.jpeg?cs=s
 mainService: Main Sunday Service
 mainServiceTime: 10:30 AM - 13:00 PM
 sundaySchools:
-  - name: Elders School
+  - title: Elders School
     time: 10:30 AM - 13:00 PM
 weekdayServicesImage: https://images.pexels.com/photos/159935/pexels-photo-159935.jpeg?cs=srgb&dl=pexels-abel-tan-jun-yang-159935.jpg&fm=jpg
 weekdayServices:

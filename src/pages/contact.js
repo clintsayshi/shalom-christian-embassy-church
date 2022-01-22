@@ -17,7 +17,7 @@ function Contact() {
             physicalAddress
             phoneNumbers {
               number
-              numberholder
+              office
             }
             email
           }
