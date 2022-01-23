@@ -1,12 +1,32 @@
-import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
+import { GatsbyImage, StaticImage, getImage } from "gatsby-plugin-image";
 import Banner from "../components/banner";
 import Layout from "../components/layout";
 
 function Donations() {
+  /* const data = useStaticQuery(graphql`
+    {
+      file(sourceInstanceName: { eq: "content" }, name: { eq: "home" }) {
+        childMarkdownRemark {
+          frontmatter {
+            title
+            snippet
+            heroImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+        }
+      }
+    }
+  `).file.childMarkdownRemark.frontmatter;
+
+  const heroImage = getImage(data.heroImage); */
+
   return (
     <Layout>
-      <Banner title="Give" img="../images/hero-bg.jpg" />
+      <Banner title="Give" image="../images/hero-bg.jpg" />
 
       <div class="container mx-auto h-px w-full my-4"></div>
 

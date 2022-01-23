@@ -1,5 +1,6 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
+import { GatsbyImage, StaticImage, getImage } from "gatsby-plugin-image";
 import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 import Banner from "../components/banner";
 import Layout from "../components/layout";
@@ -11,7 +12,11 @@ function Contact() {
         childMarkdownRemark {
           frontmatter {
             title
-            heroImage
+            heroImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
             snippet
             physicalAddress
             phoneNumbers {
@@ -25,9 +30,11 @@ function Contact() {
     }
   `).file.childMarkdownRemark.frontmatter;
 
+  const heroImage = getImage(data.heroImage);
+
   return (
     <Layout>
-      <Banner title={data.title} img="../images/hero-bg.jpg" />
+      <Banner title={data.title} image={heroImage} />
 
       <section>
         <div className="container mx-auto flex flex-col sm:items-center">

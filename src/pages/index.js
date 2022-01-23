@@ -1,11 +1,34 @@
 import * as React from "react";
-import { Link } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
+import { useStaticQuery, graphql, Link } from "gatsby";
+import { GatsbyImage, StaticImage, getImage } from "gatsby-plugin-image";
 import { FiCode } from "react-icons/fi";
 import Layout from "../components/layout";
 
 // markup
 const IndexPage = () => {
+  const data = useStaticQuery(graphql`
+    {
+      file(sourceInstanceName: { eq: "content" }, name: { eq: "home" }) {
+        childMarkdownRemark {
+          frontmatter {
+            heroImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+            subHeading
+            ctaText
+            heading
+            quotedBook
+            quote
+          }
+        }
+      }
+    }
+  `).file.childMarkdownRemark.frontmatter;
+
+  const heroImage = getImage(data.heroImage);
+
   // book-open-svg
   const BookOpen = () => {
     return (

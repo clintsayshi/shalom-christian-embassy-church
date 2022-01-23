@@ -1,13 +1,12 @@
-import { StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
 
-function Banner({ img, title }) {
+function Banner({ image, title }) {
   return (
     <section className="relative bg-white-200">
-      <img
+      <GatsbyImage
         className="absolute w-full h-full inset-0 opacity-30"
-        imgClassName="relative"
-        src="../images/home.jpg"
+        image={image}
         alt=""
       />
       <div className="container relative mx-auto py-14 md:py-20 flex flex-col justify-center">

@@ -1,6 +1,6 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage, StaticImage, getImage } from "gatsby-plugin-image";
 import Banner from "../components/banner";
 import Layout from "../components/layout";
 
@@ -14,14 +14,22 @@ function ServiceTimes() {
         childMarkdownRemark {
           frontmatter {
             title
-            heroImage
+            heroImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
             snippet
             weekdayServices {
               title
               time
               weekday
             }
-            weekdayServicesImage
+            weekdayServicesImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
             mainService
             mainServiceTime
             sundaySchools {
@@ -34,16 +42,19 @@ function ServiceTimes() {
     }
   `).file.childMarkdownRemark.frontmatter;
 
+  const heroImage = getImage(data.heroImage);
+  const weekdayServicesImage = getImage(data.weekdayServicesImage);
+
   return (
     <Layout>
-      <Banner title={data.title} img={data.heroImage} />
+      <Banner title={data.title} image={heroImage} />
 
       <div className="container mx-auto h-px w-full my-4"></div>
 
       <section>
         <div className="container mx-auto flex flex-col gap-2 sm:items-center">
-          <h2 className="text-xl text-center">Sunday Main Service</h2>
-          <p className="text-center">{data.sundayMainService}</p>
+          <h2 className="text-xl text-center">{data.mainService}</h2>
+          <p className="text-center">{data.mainServiceTime}</p>
         </div>
       </section>
 
@@ -51,9 +62,9 @@ function ServiceTimes() {
 
       <section>
         <div className="container w-full mx-auto flex flex-col sm:flex-row gap-4 sm:gap-8 sm:items-center">
-          <StaticImage
-            className="block h-40 sm:h-64 sm:py-4 w-full sm:flex-1"
-            src="../images/drake.JPG"
+          <GatsbyImage
+            className="block h-52 sm:h-64 sm:py-4 w-full sm:flex-1"
+            image={weekdayServicesImage}
             alt=""
           />
 
@@ -63,7 +74,7 @@ function ServiceTimes() {
             {React.Children.toArray(
               data.sundaySchools.map((item) => (
                 <article className="w-full flex flex-row justify-between">
-                  <h4 className="text-base font-medium">{item.name}</h4>
+                  <h4 className="text-base font-medium">{item.title}</h4>
                   <span className="text-sm text-gray-800">{item.time}</span>
                 </article>
               ))
@@ -78,27 +89,18 @@ function ServiceTimes() {
         <div className="container mx-auto flex flex-col gap-4 sm:items-center">
           <h2 className="text-xl text-center">Weekday Services</h2>
           <div className="flex flex-row flex-wrap gap-2 sm:gap-4">
-            {/* {
-              React.Children.toArray(data.weekdayServices.map(item=>(
+            {React.Children.toArray(
+              data.weekdayServices.map((item) => (
                 <article className="h-36 w-full sm:w-44 p-4 flex flex-col justify-between bg-green-200">
-              <h4 className="text-base font-medium">{item.serviceDetails.name}</h4>
+                  <h4 className="text-base font-medium">{item.title}</h4>
 
-              <div>
-                <p className="text-sm">{item.weekday}</p>
-                <time className="text-xs">{item.serviceDetails.time}</time>
-              </div>
-            </article>
-              )))
-            } */}
-
-            <article className="h-36 w-full sm:w-44 p-4 flex flex-col justify-between bg-green-200">
-              <h4 className="text-base font-medium">Fasting and Prayer days</h4>
-
-              <div>
-                <p className="text-sm">Monday</p>
-                <time className="text-xs">10:30 AM - 13:00 PM</time>
-              </div>
-            </article>
+                  <div>
+                    <p className="text-sm">{item.weekday}</p>
+                    <time className="text-xs">{item.time}</time>
+                  </div>
+                </article>
+              ))
+            )}
           </div>
         </div>
       </section>

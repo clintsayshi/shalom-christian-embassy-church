@@ -6,29 +6,10 @@ module.exports = {
 
   plugins: [
     {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          {
-            resolve: "gatsby-remark-relative-images-v2",
-          },
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 1024,
-            },
-          },
-        ],
-      },
-    },
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
-    `gatsby-transformer-remark`,
-    {
       resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/static/assets`,
-        name: "images",
+        name: "assets",
       },
     },
     {
@@ -38,7 +19,6 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
-
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -47,18 +27,51 @@ module.exports = {
       },
       __key: "pages",
     },
-    "gatsby-plugin-netlify-cms",
+    "gatsby-plugin-react-helmet",
     "gatsby-plugin-postcss",
-
     "gatsby-plugin-sass",
-    "gatsby-plugin-image",
+    `gatsby-plugin-image`,
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: [
+          {
+            resolve: "gatsby-remark-relative-images",
+            options: {
+              /* name: "assets", */
+              staticFolderName: "static",
+            },
+          },
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              // It's important to specify the maxWidth (in pixels) of
+              // the content container as this plugin uses this as the
+              // base for generating different widths of each image.
+              maxWidth: 2048,
+            },
+          },
+          {
+            resolve: "gatsby-remark-copy-linked-files",
+            options: {
+              destinationDir: "static",
+            },
+          },
+        ],
+      },
+    },
+
+    "gatsby-plugin-netlify-cms",
+
     /* {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: "",
       },
     } */
-    "gatsby-plugin-react-helmet",
+
     "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",
@@ -75,5 +88,6 @@ module.exports = {
       },
       __key: "images",
     },
+    "gatsby-plugin-netlify", // make sure to keep it last in the array
   ],
 };

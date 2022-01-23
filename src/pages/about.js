@@ -1,6 +1,6 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import Layout from "../components/layout";
 import Banner from "../components/banner";
@@ -12,22 +12,49 @@ const About = () => {
       file(name: { eq: "about" }, sourceInstanceName: { eq: "content" }) {
         childMarkdownRemark {
           frontmatter {
-            heroImage
+            heroImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
             snippet
             title
             mission
-            missionImage
+            missionImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+            vision
+            visionImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
             leaders {
-              bio
               name
-              photo
+              bio
               role
+              photo {
+                childImageSharp {
+                  gatsbyImageData
+                }
+              }
+            }
+            leadersImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+            statementOfFaithImage {
+              childImageSharp {
+                gatsbyImageData
+              }
             }
             statementOfFaith
             statementsOfFaith {
               statement
             }
-            vision
             values {
               value
             }
@@ -37,37 +64,40 @@ const About = () => {
     }
   `).file.childMarkdownRemark.frontmatter;
 
-  //const visionImage = data.visionImage
-  const missionImage = data.missionImage;
+  const heroImage = getImage(data.heroImage);
+  const statementOfFaithImage = getImage(data.statementOfFaithImage);
+  const leadersImage = getImage(data.leadersImage);
+  const missionImage = getImage(data.missionImage);
+  const visionImage = getImage(data.visionImage);
 
   return (
     <Layout>
-      <Banner title={data.name} img={data.heroImage} />
+      <Banner title={data.title} image={heroImage} />
 
       <section className="container mx-auto min-h-52 flex flex-col justify-center">
         <p className="text-sm my-4 sm:my-8">{data.snippet}</p>
 
         <div className="flex flex-row gap-2 sm:gap-2 md:gap-3 justify-between">
           <a className="block w-full" href="#mission-vision">
-            <StaticImage
+            <GatsbyImage
               className="h-24 sm:h-32 w-full"
-              src="../images/hero-bg.jpg"
+              image={visionImage}
               alt=""
             />
             <h4 className="my-1 text-xs">Mission &amp; Vision</h4>
           </a>
           <a className="block w-full" href="#what-we-believe">
-            <StaticImage
+            <GatsbyImage
               className="h-24 sm:h-32 w-full"
-              src="../images/home.jpg"
+              image={statementOfFaithImage}
               alt=""
             />
             <h4 className="my-1 text-xs">What we beleive</h4>
           </a>
           <a className="block w-full" href="#leadership">
-            <StaticImage
+            <GatsbyImage
               className="h-24 sm:h-32 w-full"
-              src="../images/drake.JPG"
+              image={leadersImage}
               alt=""
             />
             <h4 className="my-1 text-xs">Our Leadership</h4>
@@ -80,26 +110,29 @@ const About = () => {
       {/* Mission, Vision and Values */}
       <section id="mission-vision">
         <div className="container mx-auto pt-2 flex flex-col sm:flex-row items-center">
-          <StaticImage
+          <GatsbyImage
             className="block h-48 w-full sm:h-72 sm:flex-1"
-            src="../images/hero-bg.jpg"
+            image={visionImage}
+            alt=""
           />
 
           <div className="flex-1 py-5 sm:pl-10">
-            <h2 className="text-2xl">Vision</h2>
+            <h2 className="text-2xl text-secondary-color">Vision</h2>
             <p className="py-2 text-base">{data.vision}</p>
           </div>
         </div>
+
         <div className="container block mx-auto h-px w-full my-8 sm:bg-gray-200"></div>
+
         <div className="container mx-auto flex flex-col sm:flex-row-reverse items-center">
-          {/* <div className="h-48 sm:h-72 w-full sm:flex-1 bg-green-500"></div> */}
-          <StaticImage
+          <GatsbyImage
             className="block h-48 w-full sm:h-72 sm:flex-1"
-            src="../images/pastor-sithole.jpg"
+            image={missionImage}
+            alt=""
           />
 
           <div className="flex-1 py-5 sm:pr-10">
-            <h2 className="text-2xl py-0">Mission</h2>
+            <h2 className="text-2xl text-secondary-color">Mission</h2>
             <p className="pt-1 text-base">{data.mission}</p>
           </div>
         </div>
@@ -107,7 +140,7 @@ const About = () => {
         <div className="flex container mx-auto h-px w-full my-8 sm:bg-gray-200"></div>
 
         <div className="container mx-auto">
-          <h2 className="text-2xl font-normal">Values</h2>
+          <h2 className="text-2xl font-normal text-secondary-color">Values</h2>
 
           <div className="flex flex-row justify-start flex-wrap gap-1 py-4 p-0 mx-0">
             {React.Children.toArray(
@@ -125,7 +158,9 @@ const About = () => {
       <section id="what-we-believe">
         <div className="container mx-auto flex flex-col items-left">
           <header className="my-4">
-            <h2 className="mb-1 text-2xl">Statement of Faith</h2>
+            <h2 className="mb-1 text-2xl text-secondary-color">
+              Statement of Faith
+            </h2>
             <p className="text-sm">{data.statementOfFaith}</p>
           </header>
 
@@ -154,12 +189,17 @@ const About = () => {
 
           {React.Children.toArray(
             data.leaders.map((item) => {
-              const image = item.photo + "";
+              const image = getImage(item.photo);
               return (
                 <article className="w-full mb-4 flex flex-col sm:flex-row gap-4 sm:gap-6">
-                  <img
-                    className="block w-full h-60 sm:w-96"
+                  {/* <Stat
+                    
                     src={image}
+                    alt={item.name}
+                  /> */}
+                  <GatsbyImage
+                    className="block w-full h-60 sm:w-96"
+                    image={image}
                     alt={item.name}
                   />
                   <div className="flex flex-col gap-1">

@@ -1,5 +1,5 @@
-const { fmImagesToRelative } = require("gatsby-remark-relative-images-v2");
+const { fmImagesToRelative } = require("gatsby-remark-relative-images");
 
 exports.onCreateNode = ({ node }) => {
-  fmImagesToRelative(node);
+  fmImagesToRelative(node); // convert image paths for gatsby images
 };

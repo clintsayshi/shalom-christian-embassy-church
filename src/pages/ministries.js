@@ -1,5 +1,6 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
+import { GatsbyImage, StaticImage, getImage } from "gatsby-plugin-image";
 import Banner from "../components/banner";
 import Layout from "../components/layout";
 
@@ -11,7 +12,11 @@ function Ministries() {
         childMarkdownRemark {
           frontmatter {
             title
-            heroImage
+            heroImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
             snippet
             ministries {
               desc
@@ -22,6 +27,8 @@ function Ministries() {
       }
     }
   `).file.childMarkdownRemark.frontmatter;
+
+  const heroImage = getImage(data.heroImage);
 
   const ministries = data.ministries.map((item) => {
     const id = item.name.replace(" ", "-").toLowerCase();
@@ -34,7 +41,7 @@ function Ministries() {
 
   return (
     <Layout>
-      <Banner title={data.title} img={data.heroImage} />
+      <Banner title={data.title} image={data.heroImage} />
 
       <div className="container mx-auto h-px sm:my-4"></div>
 

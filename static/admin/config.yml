@@ -4,11 +4,16 @@ backend:
   name: git-gateway
   branch: master
   repo: mcclintsayshi/shalom-christian-embassy-church
+  commit_messages:
+    create: "Create {{collection}} “{{label}}”"
+    update: "Update {{collection}} “{{label}}”"
+    delete: "Delete {{collection}} “{{label}}”"
+    uploadMedia: "[skip ci] Upload “{{path}}”"
+    deleteMedia: "[skip ci] Delete “{{path}}”"
 
 local_backend: true
-
 media_folder: static/assets
-public_folder: assets
+public_folder: /assets
 
 collections:
   - label: "Pages"
@@ -84,12 +89,18 @@ collections:
               name: "statementOfFaith",
               widget: "string",
             }
+          - {
+              label: "Statement of Faith Image",
+              name: "statementOfFaithImage",
+              widget: "image",
+            }
           - label: "What we believe"
             name: "statementsOfFaith"
             widget: "list"
             summary: "{{fields.statement}}"
             fields:
               - { label: "Statement", name: "statement", widget: text }
+          - { label: "Leaders Image", name: "leadersImage", widget: "image" }
           - label: "Church Leaders"
             name: "leaders"
             widget: "list"
@@ -236,14 +247,41 @@ collections:
               default: "Upcoming events",
             }
           - { label: "Hero Image", name: "heroImage", widget: "image" }
-          - label: "Events"
-            name: "events"
-            widget: "list"
-            fields:
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Cover", name: "image", widget: "image" }
-              - { label: "Venue", name: "venue", widget: "string" }
-              - { label: "Start Time", name: "startTime", widget: "string" }
-              - { label: "End Time", name: "endTime", widget: "string" }
-              - { label: "Date", name: "date", widget: "date" }
-              - { label: "Description", name: "desc", widget: "text" }
+
+      - label: "Gallery"
+        name: "gallery"
+        file: "content/gallery.md"
+        fields:
+          - {
+              label: "Title",
+              name: "title",
+              widget: "string",
+              default: "Events",
+            }
+          - {
+              label: "Snippet",
+              name: "snippet",
+              widget: "string",
+              default: "Upcoming events",
+            }
+          - { label: "Hero Image", name: "heroImage", widget: "image" }
+
+  - name: "event"
+    label: "Event"
+    folder: "src/pages/events"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {
+          label: "Template Key",
+          name: "templateKey",
+          widget: "hidden",
+          default: "blog-post",
+        }
+      - { label: "Event Title", name: "title", widget: "string" }
+      - { label: "Event Date", name: "date", widget: "datetime" }
+      - { label: "Venue", name: "venue", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Featured Post", name: "featuredpost", widget: "boolean" }
+      - { label: "Featured Image", name: "featuredimage", widget: image }
+      - { label: "Body", name: "body", widget: "markdown" }

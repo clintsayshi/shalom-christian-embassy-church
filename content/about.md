@@ -1,21 +1,22 @@
 ---
 title: Who we are
 snippet: Church for all Nations
-heroImage: https://images.pexels.com/photos/935944/pexels-photo-935944.jpeg?cs=srgb&dl=pexels-nappy-935944.jpg&fm=jpg
+heroImage: /assets/about.jpg
 vision: To receive and maintain the peace of the Successor (Jesus Christ) and
   preach the good news of the Kingdom of God to the whole world.
-visionImage: https://images.pexels.com/photos/267549/pexels-photo-267549.jpeg?cs=srgb&dl=pexels-pixabay-267549.jpg&fm=jpg
+visionImage: /assets/vision.jpg
 mission: To ensure that the peace of our Lord Jesus Christ is received by many
   (as many as received they Him) through the preaching of the message of the
   Cross across all Nations, through deeds of mercy, church planting, home cells,
   crusades, discipleship, healing of the sick and impartation of the Gifts of
   the Holy Spirit through which all are equipped for the readiness of the
   harvest and spreading of the good news of the Kingdom of God.
-missionImage: https://images.pexels.com/photos/3633711/pexels-photo-3633711.jpeg?cs=srgb&dl=pexels-brett-sayles-3633711.jpg&fm=jpg
+missionImage: /assets/mission.jpg
 values:
   - value: Honesty
   - value: Integrity
 statementOfFaith: The church (SCE) as Body of Jesus Christ believes
+statementOfFaithImage: /assets/statement-of-faith.jpg
 statementsOfFaith:
   - statement:
       That the scriptures, both Old and New Testament are fully inspired by
@@ -24,6 +25,7 @@ statementsOfFaith:
   - statement:
       Lived a sinless life, did miracles and died on a cross to atone fully
       our sins. He rose physically from the dead and ascended to heaven.
+leadersImage: /assets/leaders.jpg
 leaders:
   - name: Apostle Sithole MZ
     role: Senior Pastor
