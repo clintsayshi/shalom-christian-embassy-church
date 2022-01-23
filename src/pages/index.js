@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
-import { GatsbyImage, StaticImage, getImage } from "gatsby-plugin-image";
-import { FiCode } from "react-icons/fi";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Layout from "../components/layout";
 
 // markup
@@ -168,27 +167,6 @@ const IndexPage = () => {
       </section>
 
       <div className="container mx-auto h-px w-full my-8 bg-gray-200"></div>
-
-      <section>
-        <div className="container mx-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-          <GatsbyImage
-            className="block h-60 md:h-64 w-full sm:w-2/5 object-cover"
-            image={ministriesImage}
-            alt=""
-          />
-
-          <div className="flex-1 ">
-            <h2 className="text-2xl text-secondary-color">Ministries</h2>
-            <p className="my-3 text-base">{ministries.snippet}</p>
-            <Link
-              to="/ministries"
-              className="block w-max py-2 px-3 rounded-sm bg-transparent text-sm sm:text-xs font-medium capitalize text-secondary-color border border-secondary-color"
-            >
-              Ministries
-            </Link>
-          </div>
-        </div>
-      </section>
 
       <div className="container mx-auto h-px my-8"></div>
     </Layout>
