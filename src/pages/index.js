@@ -7,8 +7,8 @@ import Layout from "../components/layout";
 // markup
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
-    {
-      file(sourceInstanceName: { eq: "content" }, name: { eq: "home" }) {
+    query {
+      home: file(sourceInstanceName: { eq: "content" }, name: { eq: "home" }) {
         childMarkdownRemark {
           frontmatter {
             heroImage {
@@ -24,10 +24,56 @@ const IndexPage = () => {
           }
         }
       }
-    }
-  `).file.childMarkdownRemark.frontmatter;
 
-  const heroImage = getImage(data.heroImage);
+      about: file(
+        sourceInstanceName: { eq: "content" }
+        name: { eq: "about" }
+      ) {
+        childMarkdownRemark {
+          frontmatter {
+            vision
+            visionImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+            statementOfFaithImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+            statementsOfFaith {
+              statement
+            }
+          }
+        }
+      }
+
+      ministries: file(
+        sourceInstanceName: { eq: "content" }
+        name: { eq: "ministries" }
+      ) {
+        childMarkdownRemark {
+          frontmatter {
+            snippet
+            heroImage {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+  const home = data.home.childMarkdownRemark.frontmatter;
+  const about = data.about.childMarkdownRemark.frontmatter;
+  const ministries = data.ministries.childMarkdownRemark.frontmatter;
+
+  const heroImage = getImage(home.heroImage);
+  const visionImage = getImage(about.visionImage);
+  const statementOfFaithImage = getImage(about.statementOfFaithImage);
+  const ministriesImage = getImage(ministries.heroImage);
 
   // book-open-svg
   const BookOpen = () => {
@@ -52,52 +98,41 @@ const IndexPage = () => {
   return (
     <Layout>
       <section className="relative bg-white-300">
-        <StaticImage
+        <GatsbyImage
           className="absolute w-full h-full inset-0 opacity-30"
-          src="../images/hero-bg.jpg"
+          image={heroImage}
           alt=""
         />
         <div className="container relative mx-auto h-96 md:h-96 flex flex-col justify-center z-10">
-          <h1 className="text-4xl font-semibold text-black">
-            Church for all nations
-          </h1>
-          <p className="py-4">
-            Communicating the gospel of Jesus Christ in services of God, of one
-            another and that of the world.
-          </p>
+          <h1 className="text-4xl font-semibold text-black">{home.heading}</h1>
+          <p className="py-4">{home.subHeading}</p>
           <Link
             to="/about"
             className="block w-max py-2 px-3 rounded-sm text-sm sm:text-sm capitalize text-white bg-secondary-color border-heading"
             href="#"
           >
-            Learn more
+            {home.ctaText}
           </Link>
         </div>
       </section>
 
       <section className="container mx-auto h-72 flex flex-col justify-center">
         <BookOpen />
-        <p className="py-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste,
-          repudiandae quam ipsam eos eaque alias?
-        </p>
-        <h4 className="text-sm uppercase font-medium">John 14:27</h4>
+        <p className="py-4">{home.quote}</p>
+        <h4 className="text-sm uppercase font-medium">{home.quotedBook}</h4>
       </section>
 
       <section>
         <div className="container mx-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-          {/*  <StaticImage
+          <GatsbyImage
             className="block h-60 md:h-64 w-full sm:w-2/5 object-cover"
-            src="../images/drake.JPG"
-          /> */}
+            image={visionImage}
+            alt=""
+          />
 
           <div className="flex-1 ">
             <h2 className="text-2xl text-secondary-color">Values</h2>
-            <p className="my-3 text-base">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Accusantium soluta fuga accusamus molestias necessitatibus quos
-              reiciendis autem laboriosam voluptatem? Totam.
-            </p>
+            <p className="my-3 text-base">{about.vision}</p>
             <Link
               to="/about#mission-vision"
               className="block w-max py-2 px-3 rounded-sm bg-transparent text-sm sm:text-xs font-medium capitalize text-secondary-color border border-secondary-color"
@@ -115,9 +150,7 @@ const IndexPage = () => {
           <div className="flex-1 ">
             <h2 className="text-2xl text-secondary-color">What we believe</h2>
             <p className="my-3 text-base">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Accusantium soluta fuga accusamus molestias necessitatibus quos
-              reiciendis autem laboriosam voluptatem? Totam.
+              {about.statementsOfFaith[0].statement}
             </p>
             <Link
               to="/about#what-we-believe"
@@ -127,10 +160,10 @@ const IndexPage = () => {
             </Link>
           </div>
 
-          {/* <StaticImage
+          <GatsbyImage
             className="block h-60 w-full sm:w-2/5 object-cover"
-            src="../images/home.JPG"
-          /> */}
+            image={statementOfFaithImage}
+          />
         </div>
       </section>
 
@@ -138,23 +171,20 @@ const IndexPage = () => {
 
       <section>
         <div className="container mx-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-          {/* <StaticImage
+          <GatsbyImage
             className="block h-60 md:h-64 w-full sm:w-2/5 object-cover"
-            src="../images/drake.JPG"
-          /> */}
+            image={ministriesImage}
+            alt=""
+          />
 
           <div className="flex-1 ">
             <h2 className="text-2xl text-secondary-color">Ministries</h2>
-            <p className="my-3 text-base">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Accusantium soluta fuga accusamus molestias necessitatibus quos
-              reiciendis autem laboriosam voluptatem? Totam.
-            </p>
+            <p className="my-3 text-base">{ministries.snippet}</p>
             <Link
               to="/ministries"
               className="block w-max py-2 px-3 rounded-sm bg-transparent text-sm sm:text-xs font-medium capitalize text-secondary-color border border-secondary-color"
             >
-              Church Ministries
+              Ministries
             </Link>
           </div>
         </div>
