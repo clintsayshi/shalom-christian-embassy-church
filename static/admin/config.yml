@@ -272,16 +272,11 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {
-          label: "Template Key",
-          name: "templateKey",
-          widget: "hidden",
-          default: "blog-post",
-        }
       - { label: "Event Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Event Date", name: "date", widget: "datetime" }
       - { label: "Venue", name: "venue", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Excerot", name: "excerpt", widget: "string" }
       - { label: "Featured Post", name: "featuredpost", widget: "boolean" }
       - { label: "Featured Image", name: "featuredimage", widget: image }
       - { label: "Body", name: "body", widget: "markdown" }

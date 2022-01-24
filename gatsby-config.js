@@ -22,6 +22,13 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
+        name: `events`,
+        path: `${__dirname}/events`,
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         name: "pages",
         path: "./src/pages/",
       },
@@ -38,9 +45,9 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: "gatsby-remark-relative-images",
+            resolve: "gatsby-remark-relative-images-v2",
             options: {
-              /* name: "assets", */
+              name: "assets",
               staticFolderName: "static",
             },
           },
@@ -51,12 +58,6 @@ module.exports = {
               // the content container as this plugin uses this as the
               // base for generating different widths of each image.
               maxWidth: 2048,
-            },
-          },
-          {
-            resolve: "gatsby-remark-copy-linked-files",
-            options: {
-              destinationDir: "static",
             },
           },
         ],
