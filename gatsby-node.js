@@ -1,8 +1,21 @@
 const path = require("path");
-const { fmImagesToRelative } = require("gatsby-remark-relative-images");
+const { fmImagesToRelative } = require("gatsby-remark-relative-images-v2");
 
-exports.onCreateNode = ({ node, actions }) => {
-  fmImagesToRelative(node); // convert image paths for gatsby images
+exports.onCreateNode = ({ node }) => {
+  fmImagesToRelative(node);
+};
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+
+  createTypes(`
+      type MarkdownRemark implements Node {
+          frontmatter: Frontmatter
+      }
+      type Frontmatter {
+          thumbnail: File @fileByRelativePath
+      }
+  `);
 };
 
 /*
